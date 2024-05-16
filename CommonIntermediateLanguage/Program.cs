@@ -13,7 +13,7 @@ namespace CommonIntermediateLanguage
 
             var ageAsText = Console.ReadLine();
 
-            if(int.TryParse(ageAsText, out int age))
+            if(int.TryParse(ageAsText, out int age)) //declared right here! 
             {
                 Console.WriteLine($"That young, only {age}?");
             }
@@ -22,6 +22,8 @@ namespace CommonIntermediateLanguage
                 Console.WriteLine("Sorry, I didn't get that.");
             }
             Console.WriteLine("Well, it was nice to meet you! Bye, bye!");
+            Console.WriteLine(age); //so this works out of if scope here
+
             Console.ReadKey();
         }
     }

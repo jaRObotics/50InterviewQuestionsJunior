@@ -6,7 +6,6 @@ namespace StaticKeyword
     class Box
     {
         public static int MaxCount = 50;
-
         private List<string> elements = new List<string>();
 
         public void Add(string element)
@@ -19,14 +18,17 @@ namespace StaticKeyword
 
         //can't be made static as it refers
         //to non-static elements field
-        public int GetCurrentCount()
+        public int GetCurrentCount() //this belongs to a specific instance of a class
         {
-            return elements.Count;
+            var jaro = MaxCount; // accessing static members in non-static method is OK 
+            return elements.Count; //so it can see a specific-class members 
         }
 
         public static string FormatMaxCount()
+            //static method doesn't know about instance specific data
+            //it sees only other static data 
         {
-            return $"The max count for this Box is {MaxCount}";
+            return $"The max count for this Box is {MaxCount}"; //this refers to static member 
         }
     }
 

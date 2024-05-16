@@ -1,0 +1,450 @@
+*****************
+_CIL()
+_CLR()
+_CSvsNET()
+_ValuevsReferenceTypes()
+_BoxingUnboxing()
+_ThreeMainTypesOfErrors()
+_Exceptions()
+_AccessModfiers()
+_DefaultAccessModifiers()
+_SealedModifier()
+_Params()
+_ClassVsStruct()
+_PartialClasses()
+_NewKeyword()
+_StaticKeyword()
+_StaticClass()
+_TenaryConditionalOperator()
+
+
+
+
+*****************
+
+*****************
+_CIL()
+*****************
+CommonIntermediateLanguage
+
+Intermediate Language Disassembler 
+Ildasm.exe - installed with .NET 
+bin/CommonIntermediateLanguage.dll 
+JIT compiler - feature of CLR 
+CIL - is platform independent 
+1 stage compiler (->CIL) also prepares metadata (type list, etc)
+
+*****************
+_CLR()
+*****************
+Common Language Runtime - environment that manages execution of .NET apps 
+- works as a special OS for .NET apps 
+- it's a critical component - manages basically everything under the hood 
+- OS-CLR-app 
+it manages: 
+- JIT 
+- exception handling
+- memory
+- thread 
+- type safety and CTS 
+
+CTS - Common Type System - standardized type system for all .NET languages (so they can be compiled to CIL)
+CLR is an implementation of CLI - Common Language Infrastructure (ISO standardized blueprint)
+e.g. Mono Runtime - another implementation of CLI 
+- any custom implementation can be created 
+
+*****************
+_CSvsNET()
+*****************
+99% of C# apps run on .NET 
+.NET provides CLR
+.NET provides set of standard libs
+System.String
+System.Math
+System.Console
+System.Collections
+System.Random
+System.Exception 
+
+2002 .NET Framwork  
+2016 .NET Core
+2020 .NET Core (.NET 5.0)
+
+*****************
+_ValuevsReferenceTypes() - important topic! 
+*****************
+ValueTypesAndReferenceTypes - look at it! 
+
+* VALUE types (int, bool, struct)
+- inherit from System.ValueType
+- passed by copy
+- on assigment: value is copied
+- stored on stack
+- sealed - so method/class cannot inherit form it 
+
+* REFERENCE types (array, list, string, object, classes)
+- inherit from System.Object 
+- passed by reference 
+- on assignment - reference is copied 
+- stored on heap
+
+*****************
+_BoxingUnboxing()
+*****************
+BoxingAndUnboxing
+
+Boxing - wrapping a value type into an instance of a type System.Object (reference type)
+Unboxing - converting boxed value back to a value type 
+
+string word = "abc"; - stack: address to "abc" & heap: value "abc"
+int number = 5; //stack
+object boxedNumber = number; //stack: address of boxedNumber, heap: value of number
+int unboxedNumber = (int)boxedNumber;
+
+object boxedNumber = number; //boxing is implicit 
+int unboxedNumber = (int)boxedNumber; //BoxingAndUnboxing is explicit
+
+what's boxing for?? 
+- to provied a unified type system - which assumes every variable is an object
+- it was very useful before generics were invented 
+- those times ArrayList were popular 
+- boxing is no
+
+ADO.NET uses boxing - every object in a database is an instance of System.Object
+
+both expensive:
+boxing - assignment to object 
+unboxing - casting 
+
+*****************
+_ThreeMainTypesOfErrors()
+*****************
+TypesOfErrors
+
+1. compilation errors (syntax errors, without pressing run button)
+2. runtime errors (thrown during execution (also through VS run button), crash here)
+3. logical errors (when program produces wrong result without crashing)
+- to detect logical errors it's best to use suite of unit tests 
+
+Unit tests protect us from runtime AND logical errors!
+mechanism of Exceptions protects us from runtime errors!
+
+*****************
+_Exceptions()
+*****************
+ExceptionsHandling
+
+How do we handle the errors -> Try-Catch_Finally blocks:
+Try - the code may thrown exception
+Catch - what should be done if error 
+Finally - executed no matter if exception was thrown or not 
+- Finally is typically used to free-up the resources (e.g. connection to db)
+
+e.g. 
+system error -> OutOfMemoryException
+numeric error -> OverflowException (int no large)
+parsing error -> FormatException (wrong casting)
+operation errors -> ArgumentOutOfRangeException (removing first element when NULL)
+
+all exceptions derive from System.Exception 
+
+What will be printed? ("Uno, Due, Tre, Quattro")
+try 
+{
+	Console.WriteLine("Uno");
+	throw new ArgumentException(); //this directs to catch because it's a subtype of Execution which is used in catch block below
+}
+catch(Exception ex)
+{
+	Console.WriteLine("Due");
+}
+Finally 
+{
+	Console.WriteLine("Tre")
+}
+Console.WriteLine("Quattro") //this will be printed as the exception in catch block is handled 
+
+try 
+{
+	Console.WriteLine("Uno");
+	throw new Exception(); //This won't go to catch block
+}
+catch(ArgumentException ex) //we handle only a specific subtype od Exception
+{
+	Console.WriteLine("Due");
+}
+Finally 
+{
+	Console.WriteLine("Tre")
+}
+Console.WriteLine("Quattro")
+
+//This will crash!
+
+
+*****************
+_AccessModfiers() - important
+*****************
+AccessModifiers & AccessModifiersOtherAssembly
+
+public class TestClass
+{
+	public string PublicField = "public"; //accessible in any class in any assembly
+	internal string InternalField = "internal"; //accessible in any class in this assembly
+	protected string ProtectedField = "protected"; // accessible only in classes derived from this class
+	protected internal string ProtectedInternalField = "protected internal"; // accessible from any class in this assembly, OR from derived classes in other assemblies
+	private protected string PrivateProtectedField = "private protected"; // in this assembly can only be accessed from classes derived from this class. Not accessible in another assemblies at all.
+	private string PrivateField = "private"; // not accessible in any other class
+}
+
+used in classes, structs, records 
+BUT: structs do not ingerit (only private, internal, private in use)!
+
+Assembly - compiled output of the code, typically *.dll
+a sibgle project in VS defines a single assembly 
+
+*****************
+_DefaultAccessModifiers()
+*****************
+DefaultAccessModifiers
+
+by default: the most restrictive in the given context: 
+
+two levels where we can use access modifiers:
+1. namespace level (class, struct, record, enum, delegate, interface)
+2. class level (field, property, method, event, nested classes(class, struct, record, enum, delegate, interface))
+
+1. namespace level: default INTERNAL (we cannot create private class at this level!!)
+2. class level: default PRIVATE 
+
+NOTE: nested classes: default PRIVATE !!! (as thay are at class level)
+
+*****************
+_SealedModifier()
+*****************
+SealedModifier
+
+sealed modifier: 
+1. prevents a class from being inherited 
+2. prevents overriden method from further overriding 
+
+sealed class used when: 
+- there is no point in deriving from this class 
+- sth strange may happen when overriding the method
+- for security reasons 
+- speeds up CLR (it doesn't need to look for any overriding classes further)
+
+drawbacks:
+- developer cannot implement his own behaviour because of sealing 
+- it makes unit tests super difficult 
+
+NOTE: only overriden methods can be sealed! 
+NOTE: abstract class cannot be sealed! (it's created to be inherited from)
+NOTE: static class is implicitly sealed (we cannot seal it explicitly)
+
+*****************
+_Params()
+*****************
+Params
+
+param - allows to pass any number of params of the same type to a method 
+
+NOTE: params keyword can only be applied to the last parameter 
+NOTE: params keyword must be used with single-dimensional array
+
+*****************
+_ClassVsStruct()
+*****************
+ClassVsStruct
+
+STRUCT 
+- are value types (stored on stack, passed by copy, inherit from System.ValueType)
+-- are sealed (cannot be inherited!) (as all value types are!)
+- ctor with parametes only 
+- all ctor fields must be assigned 
+- cannot have explicit parameterless ctor 
+- cannot have destructors (finalizers)
+
+CLASS 
+- reference types 
+
+NOTE: destructor - special method that is executed when the object is being removed from the memory 
+NOTE: all value types are implicitly sealed!
+NOTE: immutable type - once created cannot be modified 
+
+when should be use struct?? 
+- the type is logically small 
+- type is small from memory point of view 
+- the type is immutable 
+- type is commonly short-lived 
+- we want value type semantics 
+- it won't be boxed frequently! 
+
+what is the base type for structs? - System.ValueType
+
+*****************
+_PartialClasses()
+*****************
+PartialClasses
+
+- classes that split over two/MORE source files 
+- all parts are combined at compilation 
+- also: partial structs, interfaces, methods 
+
+//two partial classes - are equivalent to a one 
+partial class Duck
+{
+    private void Quack()
+    {
+        Console.WriteLine("Quack, quack, I'm a duck");
+    }
+}
+partial class Duck
+{
+    public void Fly()
+    {
+        Console.WriteLine("Flying high in the sky");
+    }
+}
+
+partial methods are slightly different to partial classes:
+- method signature and method body are defined in a separate files  
+
+NOTE:
+- partial classes are not commonly used!
+- used when class body is large 
+- when many developers works together on the same class (this avoids mergin errors)
+- used in automatic code generation situations (to avoid conlifcts with human-written code) 
+-- e.g. in Windows Forms - some code is generated automatically 
+-- e.g. used in Entity Framework 
+
+*****************
+_NewKeyword() - difficult one!
+*****************
+1. new operator (new instance of a type)
+2. new modifier (to hide member from a base class in a derived class)
+3. new constraint (specifies that the type argument in a generic class must have a parameterless ctor)
+
+1.
+var rachel = new Person("Rachel", 34); //constructor call
+Person john = new("John", 19); //C# 9 style
+var steve = new Person { Name = "Steve", Age = 45 }; //object initialization
+var currencies = new Dictionary<string, string> //collection initialization
+{
+    ["USA"] = "USD",
+    ["Great Britain"] = "GBP"
+};
+
+var numbers = new int[4]; //array creation
+var person = new { Name = "Anna", Age = 55 }; //anonymous type
+
+2. see: rozdzial 35 "method overriding"
+
+3. 
+class MyGeneric<T> where T: new() //this is constraint - we ensure by so that any type we use as T will have a parameterless ctor
+{
+	private T t;
+	public void Init()
+	{
+		t = new T(); //object of type T creation 
+	}
+}
+
+<List<int>>() - list has a parameterless ctor!
+
+how can I create a new object of type T in a generic class?
+- by using new constraint: where T: new()
+
+*****************
+_StaticKeyword()
+*****************
+StaticKeyword
+
+static keyword is used in two conexts:
+1. static modifier 
+2. using static directive 
+
+1. can be used with: classes, members, properties, ctors, evetns, operators, local functions, lambda expressions, anonymous methods 
+cannot be used with: structs, records 
+
+** static members belong to a type itself ** - not to a specific instance 
+
+2. to avoid repeating the code 
+using static System.Math;
+
+e.g. how to shorten Console.WriteLine(); ??
+using static System.Console  :)
+
+NOTE: const is implicitly static (acessible by type)
+NOTE: static field can be nicely used to track counter incremented by different isntances of s class 
+
+*****************
+_StaticClass()
+*****************
+StaticClass
+
+- cannot be instantiated 
+- can contain only static methods 
+- they are sealed (cannot be inherited)
+- cannot have instance ctor 
+- can have static ctor! 
+- cannot use "this" keyword (it points at current instance)
+
+- works as container for methods that only operates on input parameters and do not change any internal instance fields 
+
+build-in static classes: 
+- System.Console 
+- System.Math 
+- System.Environment
+
+static ctor - it's called when static class is used for the 1st time! 
+- must be parameterless (used only to initialize static fields)
+
+Is it possible to have a static ctor in non-static class?? 
+YES! non-static classes can have static fields and these fields can be initialized in a static ctor 
+- static ctor will be called BEFORE an instance ctor!  
+
+*****************
+_TenaryConditionalOperator()
+*****************
+TernaryOperator
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

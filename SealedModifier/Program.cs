@@ -36,7 +36,6 @@ namespace SealedModifier
     //{
     //}
 
-
     class Program
     {
         static void Main(string[] args)

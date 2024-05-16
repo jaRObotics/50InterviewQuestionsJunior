@@ -32,6 +32,8 @@ namespace ClassVsStruct
     {
         static void Main(string[] args)
         {
+            var point = new Point(); //this works fine (and uses implicit parameterless ctor)
+
             Console.WriteLine("Hello!");
             Console.ReadKey();
         }

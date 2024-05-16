@@ -9,7 +9,7 @@ namespace PartialClasses
             Console.WriteLine("Swimming in a pond");
         }
 
-        public partial void Fly()
+        public partial void Fly() //partial method here - BODY
         {
             Console.WriteLine("Flying high in the sky");
         }

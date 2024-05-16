@@ -23,8 +23,9 @@ namespace StaticClass
     static class SystemMonitor
     {
         private static readonly DateTime _startTime;
+        //readonly - so it can be initialized in ctor 
 
-        static SystemMonitor()
+        static SystemMonitor() //this is ctor! 
         {
             _startTime = DateTime.UtcNow;
         }

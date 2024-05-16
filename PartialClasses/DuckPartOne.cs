@@ -9,6 +9,6 @@ namespace PartialClasses
             Console.WriteLine("Quack, quack, I'm a duck");
         }
 
-        public partial void Fly();
+        public partial void Fly(); //partial method here - ONLY SIGNATURE
     }
 }
