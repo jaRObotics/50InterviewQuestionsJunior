@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
+//using System.Linq;
 
 namespace LINQ
 {
@@ -28,13 +28,10 @@ namespace LINQ
             }
 
             IEnumerable<Person> orderedByLastName = pirates.OrderBy(pirate => pirate.LastName);
-
             IEnumerable<int> onlyYearsOfBirth = pirates.Select(pirate => pirate.YearOfBirth);
 
             double averageYearOfBirth = pirates.Average(pirate => pirate.YearOfBirth);
-
             bool isAnyPirateBornBefore1650 = pirates.Any(pirate => pirate.YearOfBirth < 1650);
-
             bool areAllPiratesBornAfter1650 = pirates.All(pirate => pirate.YearOfBirth > 1650);
 
             IEnumerable<Person> piratesWithLastNameStartingWithR = pirates.Where(
@@ -49,3 +46,5 @@ namespace LINQ
         }
     }
 }
+
+

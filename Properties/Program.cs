@@ -75,7 +75,7 @@ namespace Properties
         {
             var person = new Person(1950, "Smith", "John");
             //we can't do that because the setter is private
-            //person.LastName = "Swanson"; 
+            person.LastName = "Swanson"; 
 
             Console.ReadKey();
         }

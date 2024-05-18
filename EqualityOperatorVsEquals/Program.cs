@@ -28,7 +28,7 @@ namespace EqualityOperatorVsEquals
             _x = x;
         }
 
-        public override bool Equals(object obj)
+        public override bool Equals(object obj) //Equals overriden here!
         {
             var item = obj as CustomClassOverridingEquals;
 
@@ -50,19 +50,17 @@ namespace EqualityOperatorVsEquals
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("For strings:");
+            //reference types - classes
+            var customClass1 = new CustomClass(1);
+            var customClass2 = new CustomClass(1);
+            Console.WriteLine($"customClass1 == customClass2: {customClass1 == customClass2}"); //FALSE
+            Console.WriteLine($"customClass1.Equals(customClass2): {customClass1.Equals(customClass2)}\n"); //FALSE why????
+
             string string1 = "abc";
             string string2 = "abc";
             Console.WriteLine($"string1 == string2: {string1 == string2}");
             Console.WriteLine($"string1.Equals(string2): {string1.Equals(string2)}\n");
 
-            Console.WriteLine("For CustomClass:");
-            var customClass1 = new CustomClass(1);
-            var customClass2 = new CustomClass(1);
-            Console.WriteLine($"customClass1 == customClass2: {customClass1 == customClass2}");
-            Console.WriteLine($"customClass1.Equals(customClass2): {customClass1.Equals(customClass2)}\n");
-
-            Console.WriteLine("For CustomClassOverridingEquals:");
             var customClassOverridingEquals1 = new CustomClassOverridingEquals(1);
             var customClassOverridingEquals2 = new CustomClassOverridingEquals(1);
             Console.WriteLine($"customClassOverridingEquals1 == customClassOverridingEquals2: " +
@@ -70,7 +68,6 @@ namespace EqualityOperatorVsEquals
             Console.WriteLine($"customClassOverridingEquals1.Equals(customClassOverridingEquals2): " +
                 $"{customClassOverridingEquals1.Equals(customClassOverridingEquals2)}\n");
 
-            Console.WriteLine("For CustomStruct:");
             var customStruct1 = new CustomStruct(1);
             var customStruct2 = new CustomStruct(1);
             // == operator is not supported for structs unless overloaded

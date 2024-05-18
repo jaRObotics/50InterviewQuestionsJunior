@@ -92,7 +92,7 @@ namespace Generics
                 ["Monica Smith"] = 1983
             };
 
-            //var invalidObject = new OnlyImplementingIFlyingInterface<int>(); //will not compile as constraint is not met
+            var invalidObject = new OnlyImplementingIFlyingInterface<int>(); //will not compile as constraint is not met
            
             Console.ReadKey();
         }

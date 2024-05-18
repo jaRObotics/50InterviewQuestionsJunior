@@ -25,8 +25,6 @@ _TenaryConditionalOperator()
 *****************
 _CIL()
 *****************
-CommonIntermediateLanguage
-
 Intermediate Language Disassembler 
 Ildasm.exe - installed with .NET 
 bin/CommonIntermediateLanguage.dll 
@@ -73,8 +71,6 @@ System.Exception
 *****************
 _ValuevsReferenceTypes() - important topic! 
 *****************
-ValueTypesAndReferenceTypes - look at it! 
-
 * VALUE types (int, bool, struct)
 - inherit from System.ValueType
 - passed by copy
@@ -91,8 +87,6 @@ ValueTypesAndReferenceTypes - look at it!
 *****************
 _BoxingUnboxing()
 *****************
-BoxingAndUnboxing
-
 Boxing - wrapping a value type into an instance of a type System.Object (reference type)
 Unboxing - converting boxed value back to a value type 
 
@@ -119,8 +113,6 @@ unboxing - casting
 *****************
 _ThreeMainTypesOfErrors()
 *****************
-TypesOfErrors
-
 1. compilation errors (syntax errors, without pressing run button)
 2. runtime errors (thrown during execution (also through VS run button), crash here)
 3. logical errors (when program produces wrong result without crashing)
@@ -132,8 +124,6 @@ mechanism of Exceptions protects us from runtime errors!
 *****************
 _Exceptions()
 *****************
-ExceptionsHandling
-
 How do we handle the errors -> Try-Catch_Finally blocks:
 Try - the code may thrown exception
 Catch - what should be done if error 
@@ -206,8 +196,6 @@ a sibgle project in VS defines a single assembly
 *****************
 _DefaultAccessModifiers()
 *****************
-DefaultAccessModifiers
-
 by default: the most restrictive in the given context: 
 
 two levels where we can use access modifiers:
@@ -222,8 +210,6 @@ NOTE: nested classes: default PRIVATE !!! (as thay are at class level)
 *****************
 _SealedModifier()
 *****************
-SealedModifier
-
 sealed modifier: 
 1. prevents a class from being inherited 
 2. prevents overriden method from further overriding 
@@ -245,8 +231,6 @@ NOTE: static class is implicitly sealed (we cannot seal it explicitly)
 *****************
 _Params()
 *****************
-Params
-
 param - allows to pass any number of params of the same type to a method 
 
 NOTE: params keyword can only be applied to the last parameter 
@@ -255,8 +239,6 @@ NOTE: params keyword must be used with single-dimensional array
 *****************
 _ClassVsStruct()
 *****************
-ClassVsStruct
-
 STRUCT 
 - are value types (stored on stack, passed by copy, inherit from System.ValueType)
 -- are sealed (cannot be inherited!) (as all value types are!)
@@ -285,8 +267,6 @@ what is the base type for structs? - System.ValueType
 *****************
 _PartialClasses()
 *****************
-PartialClasses
-
 - classes that split over two/MORE source files 
 - all parts are combined at compilation 
 - also: partial structs, interfaces, methods 
@@ -358,8 +338,6 @@ how can I create a new object of type T in a generic class?
 *****************
 _StaticKeyword()
 *****************
-StaticKeyword
-
 static keyword is used in two conexts:
 1. static modifier 
 2. using static directive 
@@ -381,8 +359,6 @@ NOTE: static field can be nicely used to track counter incremented by different 
 *****************
 _StaticClass()
 *****************
-StaticClass
-
 - cannot be instantiated 
 - can contain only static methods 
 - they are sealed (cannot be inherited)
@@ -407,7 +383,476 @@ YES! non-static classes can have static fields and these fields can be initializ
 *****************
 _TenaryConditionalOperator()
 *****************
-TernaryOperator
+- "ternary" - "potrójny" 
+- it provides shorter syntax for if-else statement 
+- it evaluates boolean expression and returns result of one of the two expressions 
+NOTE : dog.Weight > 25 ? - this is conditional expression
+
+** var value = boolean expresision ? value if true : value if false; **
+
+NOTE: we use ternary conditional expression for assigment only! 
+var size = dog.Weight > 25 ? "big" : "small";
+
+//nested ternary conditional operator 
+var moreSpecificSize = dog.Weight > 25 ? "big" : dog.Weight < 5 ? "small" : "medium";
+
+//the below does not compile because there is no assignment here
+dog.Weight > 100 ? Console.WriteLine("Wow!") : Console.WriteLine("It's a normal dog");
+
+//the below will compile 
+var message = dog.Weight > 100 ? "Wow!": "It's a normal dog";
+ 
+/can CDO be always translated to if-else? YES
+/can if-else be alwyas translated to TCO? NO 
+
+*****************
+_NullOperators() - learn it!
+*****************
+- they allow to perform some operations if the value is null or !null
+
+1. null coalesing operator (??)
+2. null coalescing assignment operator (??=)
+3. null conditional operator (?.)
+
+1.
+public static string Greet(string name)
+{
+	return $"Hello, {name ?? "Stranger"}!"; //!null ?? null 
+	//note: "Stranger" inside curcly brackets 
+}
+
+Greeter.Greet(null); -> "Stranger" //NOTE: null can be an argument!
+Greeter.Greet("jaro"); -> "jaro"
+
+2. 
+//the common way: 
+
+private static List<int> _numbers; //NOTE: this is not initialized! 
+static void AddNumbers(int number)
+{
+    if (_numbers == null)
+    {
+        _numbers = new List<int>(); //ceate here first
+    }
+    _numbers.Add(number); //and then add here 
+}
+
+//null coalescing operator way:
+(_numbers ??= new List<int>()).Add(5);
+//if null -> (_numbers = new List<int>()).Add(5)
+//if !null -> _numbers.Add(5)
+
+
+3. if we want to access only if the object is !null
+static void ClearIfNotNullCommon(List<int> numbers)
+{
+	numbers.Clear(); //this will throw error if list already null
+	numbers?.Clear(); //this will only be called when the *? parameter is not null 
+}
+
+ClearIfNotNullCommon(null); //NOTE: null can be an argument!
+ClearIfNotNullCommon(_numbers);
+
+/How to check if an object is not null but without using if? 
+
+*****************
+_Encapsulation() 
+*****************
+** Encapsulation ** bundling of data with the methods that operate on that data 
+=> data + methods working with that data 
+=> it's not equal to data-hiding 
+=> it's always a good idea to use data-hiding with encapsulation! 
+
+benefits of encaulsulation: 
+- more logical structure of a code 
+- helps in avoiding code repetition 
+- hides implementation 
+
+Encapsulation vs Abstraction
+- abstraction is generalization - it's a blueprint for implementation 
+- encapsulation - has implementation 
+
+class Rectangle
+{
+	public int A; 
+	public int B;
+
+	public int Area()
+	{
+		return A * B;
+	}
+}
+
+//this code encapsulates its data 
+//it does not hide its data! 
+
+*****************
+_LINQ() - one of most powerful features 
+*****************
+- set of tech allowing simple querrying over different kinds of data
+
+Two ways of querying over data: 
+1. query syntax 
+2. method syntax
+
+1. 
+var bornAfter1685QuerySyntax = from pirate in pirates
+                               where pirate.YearOfBirth > 1685
+                               select pirate;
+
+2. 
+var bornAfter1685MethodSyntax = pirates.Where(pirate => pirate.YearOfBirth > 1685);
+
+benefits of LINQ: 
+- common syntax for querrying data  
+- simple ways of manipulating data 
+- option to chain querries 
+
+LINQ provider - class that implements IQueryProvider and IQueryable interfaces 
+- it allows to query a specific data (XML, SQL)
+
+*****************
+_ExtensionMethods() 
+*****************
+- method deinfed outside of class and that can be called upon objects of this class (as a regular member method)
+
+class with the extension method must be static and non-generic!
+
+*****************
+_IEnumerable() - to be revised!
+*****************
+- interface that allows iterating with foreach over a collection 
+- provides read-only acces to the collection (no Add, Clear, Remove..)
+
+IEnumerator - mechanism that allows iterating over collection elements 
+- it's kind of a pointer to the collection current element 
+
+*****************
+_EqualityOperatorVsEquals() - to be revised! TO BE CONTINUED 
+*****************
+EqualityOperatorVsEquals
+
+equality operator (==) - compares objects by reference  
+Equals (Equals()) - compares objects by their content 
+
+compraison by reference: checks if two variables POINT to the same object in memory
+
+NOTE: these operators can be overloaded/overriden - so their behaviour may vary! 
+
+
+
+*****************
+_DeepCopyVsShallowCopy() - important one!
+*****************
+1. Shallow copy 
+- value types: copied
+- reference types: only reference copied 
+
+2. Deep copy 
+- value types: copied
+- reference types: brand new copy created (teh same value but a new reference)
+
+MemberwiseClone() - method to shallow copy from System.Object
+
+
+*****************
+_GC()
+*****************
+if (args != null)
+{
+	int a = 5; //memory allocated on stack 
+	string j = "jaro"; //memory allocated on heap
+} //here memory allocated for int a gets freed
+// GC will free up memory for string j but we cannot say when exactly! 
+
+When GC runs?
+- low physical memory 
+- memory limits for objects on the heap 
+- when we call GC.Collect (do not use it)
+
+GC has its own thread (freezes the other of works) 
+- might cause performance issues 
+
+GC also performs memory defragmentation  
+GC does not prevents from memory leaks!
+
+Memory leak - happens when some piece of memory is not being cleaned up even if there is no object associated with it any longer 
+
+*****************
+_NullableTypes()
+*****************
+in C# default: 
+value types: non-nullable
+reference types: nullable
+
+int j = null; //ERROR 
+int? j = null; //OK, it's a shortage of the below, default=null !
+Nullable<int> j = null;
+
+Nullable<int> - this is a struct, so a value type 
+C# trick, it does this:
+Nullable<int> j = new Nullable<int(); //reference type! 
+
+ACHTUNG: 
+int num = j; //ERROR 
+int num = j.Value; //unpacking value from nullable needed
+
+Is Nullable<string> possible? NO
+In Nullable<T> T cannot be of a reference type!  
+so Nullable<T> is a value type!
+
+*****************
+_Property() - good explanation of a use case! 
+*****************
+- it's a member that provides a mechanism for reading/writing/computing a value of a private field
+
+benefits: 
+- supports encapsulation and data-hiding 
+- we can create any logic in setter and getter 
+- enables control over access
+- properties can be overriden 
+
+*****************
+_Generics()
+*****************
+generics allows to create classes/methods that are parametrized by type 
+
+constraints added if needed:
+public class OnlyTypesWithParameterlessConstructor<T> where T : new()
+
+benefits:
+- we don't need to repeat a code for different types 
+
+What are type constraints? 
+What is "where" jeyword used for? (generics constraint, linq querries)
+
+*****************
+_ConstVSReadonly()
+*****************
+CONST 
+- assigned at compile time
+- numbers, booleans, string, null 
+- implicitly static (cannot be made static)
+
+READONLY
+- can be assigned at runtime in ctor 
+- can be anything 
+- can be declared static 
+
+NOTE!!: if readonly was assigned at the declaration and then via ctor then it will take the ctor value!
+
+*****************
+_REFVSOUT()
+*****************
+REF 
+- passes the value by reference (so changes its original value)
+- the value must be initialized before use
+
+OUT
+- allows us to reruen extra variables from the method
+- the out variable can be created at method call: 
+private static bool TryParseToInt(string input, out int result) //declaration here! 
+if "int" ommitted then it needs to be declared earlier:
+private static bool TryParseToInt(string input, out result) 
+
+- value must be assigned inside the method 
+- can apply ANY number of out paramters 
+
+*****************
+_interfaceVSAbstractClass()
+*****************
+INTERFACE 
+- abstraction over behaviour
+- no implementation
+- all methods public by default (no "public" keyword in use)
+- cannot have ctor
+- cannot have fields but only properties 
+
+ABSTRACT CLASS 
+- abstracion over alikeness
+- may have implementation (non-abstract method) or do no have (abstract method)
+- methods can have various access modifiers
+- can have ctor 
+- can have fields 
+
+NOTE: if abstract class inherits from another abstract class it does not need to override the other class abstract methods 
+
+*****************
+_Polymorphism()
+*****************
+- concept of creating an implementation upon multiple types 
+- it's realized via interfaces! (no knowledge about the concrete types in use - only the general concept of them being interface - so we can use many object of many different types = Polymorphism)
+- there is one list but their object can have many forms 
+
+What mechanisms used in polymorphism?
+- interface
+- abstract class 
+- inheritance 
+- virtual methods
+- generics 
+
+*****************
+_VirtualVSAbstractMethod() - ToString() overriding explained here!
+*****************
+VIRTUAL 
+- can be overriden
+- must have its own implementation
+- cannot use "new", "static", "virtual" with "override"!
+
+
+ABSTRACT
+- must be overriden 
+- does no need to have its implementation
+- it' implicitly virtual 
+- abstract class cannot be instantiated!! 
+
+
+IMPORTANT EXAMPLE: 
+class BASE 
+{
+	public virtual void Print()
+	{
+		Console.WriteLine("Base here");
+	}
+}
+class Derived : Base 
+{
+	public overrinde void print()
+	{
+		Console.WriteLine("Derived here");
+	}
+}
+
+Base c1 = new Base();
+Base c2 = new Derived(); //derived class first! (IT CAN BE OF BASE TYPE)	
+Derived c3 = new Deriver();
+
+Console.WriteLine($"{c1} {c2} {c3}");
+"Derived here", "Derived here", "Base here"
+
+Can abstract class have a virtual methods?? YES 
+
+*****************
+_MethodOverloading() 
+*****************
+private static int Add(int a, int b) => return a + b;
+private static int Add(ref int a, ref int b) => return a + b;
+
+/ref can be used in overloading!
+BUT: ref AND out cannot be used for overloading 
+
+if optional param in overloading - priority for the closest signature - so the one without an optional params
+
+*****************
+_MethodOverloadingVSMethodHiding() 
+*****************
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

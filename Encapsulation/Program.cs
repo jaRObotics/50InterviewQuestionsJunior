@@ -25,7 +25,7 @@ namespace Encapsulation
             End = end;
         }
 
-        public float Length()
+        public float Length() //this method is here as it operates on the data from this class
         {
             var xCoordinatesDifference = End.X - Start.X;
             var yCoordinatesDifference = End.Y - Start.Y;
@@ -45,7 +45,7 @@ namespace Encapsulation
             Console.ReadKey();
         }
 
-        //no encapsulation here
+        //no encapsulation here - data is in Point/LineSegment class and the method operating on it is here! 
         //static float Length(LineSegment lineSegment)
         //{
         //    var xCoordinatesDifference = lineSegment.End.X - lineSegment.Start.X;

@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace IEnumerable
 {
-    class CustomCollection
+    class CustomCollection //this does not use IEnumerable interface 
     {
         public string[] Words { get; }
 
@@ -14,7 +14,7 @@ namespace IEnumerable
         }
     }
 
-    class WordsCollection : System.Collections.IEnumerable
+    class WordsCollection : System.Collections.IEnumerable //our own implementation 
     {
         private string[] _words;
 
@@ -72,15 +72,19 @@ namespace IEnumerable
         {
             var words = new[] { "a", "little", "duck" };
 
-            Console.WriteLine("With foreach loop:");
             foreach (var word in words)
             {
                 Console.WriteLine(word);
             }
 
-            //the code above and the code below are eqivalent
+            //this doesn't work because CustomCollection does not implement IEnumerable
+            var customCollection = new CustomCollection(words);
+            foreach (var word in customCollection)
+            {
+                Console.WriteLine(word);
+            }
 
-            Console.WriteLine("\nWith enumerator:");
+            //foreach is translated by the compilator to the below (under the hood):
             IEnumerator wordsEnumerator = words.GetEnumerator();
             string currentWord;
             while (wordsEnumerator.MoveNext())
@@ -89,12 +93,6 @@ namespace IEnumerable
                 Console.WriteLine(currentWord);
             }
 
-            //this doesn't work because CustomCollection does not implement IEnumerable
-            var customCollection = new CustomCollection(words);
-            //foreach(var word in customCollection)
-            //{
-            //    Console.WriteLine(word);
-            //}
 
             // WordsCollection implements IEnumerable
             Console.WriteLine("\nCustom WordsCollection implementing IEnumerable:");

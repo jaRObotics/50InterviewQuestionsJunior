@@ -3,8 +3,12 @@
   "WorkspaceRootPath": "E:\\[C# Learning]\\Ultimate C# Masterclass Udemy\\My Projects\\CSMasterclassJunior\\50InterviewQuestionsJunior\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{14628827-7D3B-49C7-9784-F2E391F58B19}|TernaryOperator\\TernaryOperator.csproj|e:\\[c# learning]\\ultimate c# masterclass udemy\\my projects\\csmasterclassjunior\\50interviewquestionsjunior\\ternaryoperator\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{14628827-7D3B-49C7-9784-F2E391F58B19}|TernaryOperator\\TernaryOperator.csproj|solutionrelative:ternaryoperator\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{3C360BC1-FCF4-4CDF-96E3-11816166588D}|MethodOverridingVsMethodHiding\\MethodOverridingVsMethodHiding.csproj|e:\\[c# learning]\\ultimate c# masterclass udemy\\my projects\\csmasterclassjunior\\50interviewquestionsjunior\\methodoverridingvsmethodhiding\\shapes.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3C360BC1-FCF4-4CDF-96E3-11816166588D}|MethodOverridingVsMethodHiding\\MethodOverridingVsMethodHiding.csproj|solutionrelative:methodoverridingvsmethodhiding\\shapes.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3C360BC1-FCF4-4CDF-96E3-11816166588D}|MethodOverridingVsMethodHiding\\MethodOverridingVsMethodHiding.csproj|e:\\[c# learning]\\ultimate c# masterclass udemy\\my projects\\csmasterclassjunior\\50interviewquestionsjunior\\methodoverridingvsmethodhiding\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3C360BC1-FCF4-4CDF-96E3-11816166588D}|MethodOverridingVsMethodHiding\\MethodOverridingVsMethodHiding.csproj|solutionrelative:methodoverridingvsmethodhiding\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -19,14 +23,27 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "Program.cs",
-              "DocumentMoniker": "E:\\[C# Learning]\\Ultimate C# Masterclass Udemy\\My Projects\\CSMasterclassJunior\\50InterviewQuestionsJunior\\TernaryOperator\\Program.cs",
-              "RelativeDocumentMoniker": "TernaryOperator\\Program.cs",
-              "ToolTip": "E:\\[C# Learning]\\Ultimate C# Masterclass Udemy\\My Projects\\CSMasterclassJunior\\50InterviewQuestionsJunior\\TernaryOperator\\Program.cs",
-              "RelativeToolTip": "TernaryOperator\\Program.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAIAAAAKAAAA",
+              "Title": "Shapes.cs",
+              "DocumentMoniker": "E:\\[C# Learning]\\Ultimate C# Masterclass Udemy\\My Projects\\CSMasterclassJunior\\50InterviewQuestionsJunior\\MethodOverridingVsMethodHiding\\Shapes.cs",
+              "RelativeDocumentMoniker": "MethodOverridingVsMethodHiding\\Shapes.cs",
+              "ToolTip": "E:\\[C# Learning]\\Ultimate C# Masterclass Udemy\\My Projects\\CSMasterclassJunior\\50InterviewQuestionsJunior\\MethodOverridingVsMethodHiding\\Shapes.cs",
+              "RelativeToolTip": "MethodOverridingVsMethodHiding\\Shapes.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-16T14:26:52.103Z",
+              "WhenOpened": "2024-05-18T12:25:07.667Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Program.cs",
+              "DocumentMoniker": "E:\\[C# Learning]\\Ultimate C# Masterclass Udemy\\My Projects\\CSMasterclassJunior\\50InterviewQuestionsJunior\\MethodOverridingVsMethodHiding\\Program.cs",
+              "RelativeDocumentMoniker": "MethodOverridingVsMethodHiding\\Program.cs",
+              "ToolTip": "E:\\[C# Learning]\\Ultimate C# Masterclass Udemy\\My Projects\\CSMasterclassJunior\\50InterviewQuestionsJunior\\MethodOverridingVsMethodHiding\\Program.cs",
+              "RelativeToolTip": "MethodOverridingVsMethodHiding\\Program.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-18T12:25:07.152Z",
               "EditorCaption": ""
             }
           ]

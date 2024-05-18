@@ -19,17 +19,13 @@ namespace TernaryOperator
             //}
 
             var size = dog.Weight > 25 ? "big" : "small";
-
             Console.WriteLine($"The dog is {size}");
 
             var moreSpecificSize = dog.Weight > 25 ? "big" : dog.Weight < 5 ? "small" : "medium";
-
             Console.WriteLine($"The dog is {moreSpecificSize}");
 
             //the below does not compile because there is no assignment here
-            //dog.Weight > 100 ? 
-            //    Console.WriteLine("Wow!") : 
-            //    Console.WriteLine("It's a normal dog");
+            dog.Weight > 100 ? Console.WriteLine("Wow!") : Console.WriteLine("It's a normal dog");
 
             Console.ReadKey();
         }

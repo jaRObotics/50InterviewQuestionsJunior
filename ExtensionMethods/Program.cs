@@ -2,7 +2,7 @@
 
 namespace ExtensionMethods
 {
-    public static class StringExtensions
+    public static class StringExtensions // it's a nam ing convention here 
     {
         public static int NumberOfLines(this string input)
         {
@@ -20,7 +20,7 @@ namespace ExtensionMethods
 
     public static class DuckExtensions
     {
-        public static string Quack(this Duck duck)
+        public static string Quack(this Duck duck) //the same signature method 
         {
             return "(This is an extension method) Quack, quack, I'm a duck";
         }
@@ -30,7 +30,6 @@ namespace ExtensionMethods
     {
         static void Main(string[] args)
         {
-
             var multilineString = @"Said the Duck to the Kangaroo,
                                     Good gracious! how you hop
                                     Over the fields, and the water too,
@@ -46,6 +45,7 @@ namespace ExtensionMethods
 
             var duck = new Duck();
             //the non-extension method will be called
+            //NOTE: member method has priority over an extension method (if the same signatures)
             Console.WriteLine(duck.Quack());
 
             Console.ReadKey();
